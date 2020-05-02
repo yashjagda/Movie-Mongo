@@ -1,0 +1,219 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7 no-js" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 no-js" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+
+<!-- Mirrored from haintheme.com/demo/html/bustter/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Apr 2020 21:41:07 GMT -->
+<head>
+	<!-- Basic need -->
+	<title>Movie Mongo</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+
+    <!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	<!-- CSS files -->
+	<link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<!--preloading-->
+
+<!--end of preloading-->
+<!--login form popup-->
+
+<!-- BEGIN | Header -->
+<header class="ht-header">
+	<div class="container">
+		<nav class="navbar navbar-default navbar-custom">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header logo">
+				    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					    <span class="sr-only">Toggle navigation</span>
+					    <div id="nav-icon1">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+				    </div>
+				    <a href="{% url 'movi:index' %}"><h1> Movie Mongo </h1></a>
+			    </div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav flex-child-menu menu-left">
+						<li class="hidden">
+							<a href="#page-top"></a>
+						</li>
+						<li class="dropdown first">
+							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
+							Home
+							</a>
+						</li>
+					</ul>
+				</div>
+			<!-- /.navbar-collapse -->
+	    </nav>
+
+	    <!-- top search form -->
+			<form action="{% url 'movi:listing' %}" method="POST" id="advanceSearch">
+	    <div class="top-search">
+			<input type="text" name="movie_name" placeholder="Search for a movie that you are looking for..">
+	    </div>
+			{% csrf_token %}
+		</form>
+	</div>
+</header>
+<!-- END | Header -->
+{% block content %}
+<div class="slider movie-items">
+	<div class="container">
+		<div class="row">
+	    	<div  class="slick-multiItemSlider">
+					{% for mov in movies %}
+	    		<div class="movie-item">
+	    			<div class="mv-img">
+	    				<a href="#"><img src="http://image.tmdb.org/t/p/w185/{{mov.poster_path}}" alt="" onerror=this.src="{% static 'images/uploads/mv-item7.jpg' %}" width="285" height="437"></a>
+	    			</div>
+	    			<div class="title-in">
+	    				<div class="cate">
+	    					<span class="blue"><a href="#">{{mov.status}}</a></span>
+	    				</div>
+	    				<h6><a href="movi/{{mov.id}}">{{mov.title}}</a></h6>
+	    				<p><i class="ion-android-star"></i><span>{{mov.vote_average}}</span> /10</p>
+	    			</div>
+	    		</div>
+					{% endfor %}
+	    	</div>
+	    </div>
+	</div>
+</div>
+
+<!--
+222222222222222222222222222222222222222222222222222222222222222222222222222222 -->
+
+
+
+<form action="{% url 'movi:genre' %}" method="POST" id="advanceSearch">
+<div class=" top-search col-12 col-md-6 col-lg-6 ">
+<input type="text" name="movie_genre" placeholder="Search for a movie using genres like Horror, Comedy etc..">
+</div>
+{% csrf_token %}
+</form>
+
+
+
+<div class="movie-items">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<div class="title-hd">
+					<h2>Genre wise</h2>
+
+				</div>
+				<div class="tabs">
+
+				    <div class="tab-content">
+				        <div id="tab1" class="tab active">
+				            <div class="row">
+				            	<div class="slick-multiItem">
+												{% for bill in keys %}
+				            		<div class="slide-it">
+
+				            			<div class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="http://image.tmdb.org/t/p/w185/{{bill.poster_path}}" alt="" onerror=this.src="{% static 'images/uploads/mv-item7.jpg' %}" width="185" height="284">
+					            			</div>
+					            			<div class="hvr-inner">
+					            				<a  href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="movies/{{bill.id}}">{{bill.title}}</a></h6>
+					            				<p><i class="ion-android-star"></i><span>{{bill.vote_average}}</span> /10</p>
+					            			</div>
+					            		</div>
+
+				            		</div>
+												{% endfor %}
+				             	</div>
+				            </div>
+				        </div>
+
+				    </div>
+				</div>
+<!--
+33333333333333333333333333333333333333333 -->
+<br><br><br><br><br>
+<form action="{% url 'movi:vote' %}" method="POST" id="advanceSearch">
+	<div class="row">
+	<div class="col-12 col-md-6 col-lg-6">
+	<div class="form-group">
+
+  <input type="text" name="vote_average" class="form-control" placeholder="Enter a rating">
+	</div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-6">
+		<input type="text" name="vote_genre" class="form-control" placeholder="Enter a Genre">
+	</div>
+</div>
+{% csrf_token %}
+<button type="submit" class="btn south-btn">Search</button>
+</form>
+
+
+<br><br>
+				<div class="title-hd">
+					<h2>Successful in Their respective genre</h2>
+					<p> (Movies will atleast have a revenue of 300 Million) </p>
+				</div>
+			</div>
+
+
+
+
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="celebrities">
+						<h4 class="sb-title">Movie Credits</h4>
+						<form action="{% url 'movi:credit' %}" method="POST" id="advanceSearch">
+						<div class="col-12 col-md-6 col-lg-6">
+						<input type="text" name="movie_credit" placeholder="Search for a movie using genres	 like Horror, Comedy etc..  ">
+						</div>
+						{% csrf_token %}
+						</form>
+						{% for credit in credits %}
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<p>{{credit.credits.crew}}</p>
+								<!-- <span>Actor</span> -->
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/plugins.js'%}"></script>
+<script src="{% static 'js/plugins2.js'%}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+<!-- Mirrored from haintheme.com/demo/html/bustter/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Apr 2020 21:41:37 GMT -->
+</html>

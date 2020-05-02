@@ -1,0 +1,83 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7 no-js" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 no-js" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+
+<!-- Mirrored from haintheme.com/demo/html/bustter/movielist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Apr 2020 21:42:15 GMT -->
+<head>
+	<!-- Basic need -->
+	<title>Genre wise Movies</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+
+    <!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	<!-- CSS files -->
+  <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+{% block content %}
+<div class="hero common-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1> Genre wise Movies </h1>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single movie_list">
+	<div class="container">
+		<div class="row ipad-width2">
+			<div class="col-md-8 col-sm-12 col-xs-12">
+        {% for list in movie_detail %}
+				<div class="movie-item-style-2">
+					<img src="http://image.tmdb.org/t/p/w185/{{list.poster_path}}" alt="" onerror=this.src="{% static 'images/uploads/mv-item7.jpg' %}" >
+					<div class="mv-item-infor">
+						<h6><a href="moviesingle.html">{{list.title}} <span>({{list.release_date}}</span></a></h6>
+						<p class="rate"><i class="ion-android-star"></i><span>{{list.vote_average}}</span> /10</p>
+						<p class="describe"> {{list.overview}} </p>
+						<p class="run-time"> Revenue: ${{list.revenue}} </p>
+					</div>
+				</div>
+        {% endfor %}
+
+
+
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- footer section-->
+{% endblock %}
+<!-- end of footer section-->
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/plugins.js'%}"></script>
+<script src="{% static 'js/plugins2.js'%}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+<!-- Mirrored from haintheme.com/demo/html/bustter/movielist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Apr 2020 21:42:15 GMT -->
+</html>
